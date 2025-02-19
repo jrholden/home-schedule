@@ -1,34 +1,14 @@
 
-import DataFetcher from "@/components/DataFetcher/DataFetcher";
-import Footer from "@/components/Footer/Footer";
-import Header from "@/components/Header/Header";
-import Image from "next/image";
-
-export const metadata = {
-  title: 'Home Schedule',
-  description: 'Manage your home schedule efficiently',
-  icons: {
-    icon: '/favicon.ico',
-  },
-};
 
 
-export default function Home() {
+import Home from "./home/page";
+import RootLayout from "./layout";
+
+
+export default function Main() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <Header />
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <DataFetcher />
-      </main>
-      <Footer />
-    </div>
+    
+      <Home />
+    
   );
 }
