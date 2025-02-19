@@ -12,7 +12,8 @@ const DataFetcher: React.FC = () => {
     const fetchData = async () => {
       try {
         const result = await Backend.get(`${process.env.NEXT_PUBLIC_API_URL}/`);
-        setData(result);
+        const result2 = await Backend.get(`${process.env.NEXT_PUBLIC_API_URL}/api/`);
+        setData(result2);
       } catch (err) {
         setError('Failed to fetch data + ' + err);
       } finally {
