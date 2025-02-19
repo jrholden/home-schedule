@@ -11,7 +11,7 @@ const DataFetcher: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const result = await Backend.get('http://localhost:9595/');
+        const result = await Backend.get(`${process.env.NEXT_PUBLIC_API_URL}/`);
         setData(result);
       } catch (err) {
         setError('Failed to fetch data + ' + err);

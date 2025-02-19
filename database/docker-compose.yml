@@ -7,9 +7,9 @@ services:
     ports:
       - "9196:27017"
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=admin
-      - MONGO_INITDB_ROOT_PASSWORD=adminpassword
-      - GLIBC_TUNABLES=glibc.pthread.rseq=0
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
+      - GLIBC_TUNABLES=${GLIBC_TUNABLES}
     volumes:
       - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
       - ./data/dev:/docker-entrypoint-initdb.d/data-stage:ro
