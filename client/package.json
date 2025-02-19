@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "create:component": "sh ./dev-tools/react-helpers/react-boilerplate.sh component",
+    "create:service": "sh ./dev-tools/react-helpers/react-boilerplate.sh service",
+    "create:hook": "sh ./dev-tools/react-helpers/react-boilerplate.sh hook"
   },
   "dependencies": {
     "react": "^19.0.0",
