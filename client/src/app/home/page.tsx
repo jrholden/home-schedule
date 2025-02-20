@@ -1,11 +1,12 @@
 import React from 'react';
-import DataFetcher from "@/components/DataFetcher/DataFetcher";
+
+import Calendar from '@/components/Calendar/Calendar';
 
 const Home: React.FC = () => {
   return (
     <div>
       <h1>Home Page</h1>
-      <DataFetcher />
+      <Calendar  />
     </div>
   );
 };
