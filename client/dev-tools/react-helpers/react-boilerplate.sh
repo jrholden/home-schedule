@@ -28,6 +28,11 @@ test('renders $name component', () => {
   render(<$name />);
 });
 EOL
+cat <<EOL > "$dir/$name.module.css"
+.$name {
+  color: red;
+}
+EOL
 
   echo "Component $name created successfully."
 }
@@ -65,16 +70,6 @@ const use$name = () => {
 };
 
 export default use$name;
-EOL
-
-  cat <<EOL > "$dir/use$name.test.ts"
-import { renderHook } from '@testing-library/react-hooks';
-import use$name from './use$name';
-
-test('should use use$name hook', () => {
-  const { result } = renderHook(() => use$name());
-  expect(result.current).toBe('Hello from use$name hook!');
-});
 EOL
 
   echo "Hook use$name created successfully."

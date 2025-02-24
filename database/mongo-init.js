@@ -13,7 +13,9 @@ print('Inserted users into the users collection');
 // Create and populate the items collection
 db.createCollection('items');
 db.items.insertMany([
-  { name: 'Test Item 1', dateInfo: 'Test Date', itemInfo: 'TestInfo' }
+  { name: 'Test Item 1', dateInfo: 'Test Date', itemInfo: 'TestInfo' },
+  { name: 'Test Item 2', dateInfo: 'Test Date2', itemInfo: 'TestInfo2' },
+  { name: 'Test Item 3', dateInfo: 'Test Date3', itemInfo: 'TestInfo3' }
 ]);
 print('Inserted items into the items collection');
 
