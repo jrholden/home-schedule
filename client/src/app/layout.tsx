@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
 import { ItemContextProvider } from "@/context/ItemContext";
+import { DateContextProvider } from "@/context/DateContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,11 +36,13 @@ export default function RootLayout({
       >
         <div className="core-content grid grid-rows-[auto_1fr_auto] min-h-screen">
           <Header />
-          <ItemContextProvider>
-            <main className="main flex flex-col gap-8 items-center sm:items-start p-8 sm:p-20">
-              {children}
-            </main>
-          </ItemContextProvider>
+          <DateContextProvider>
+            <ItemContextProvider>
+              <main className="main flex flex-col gap-8 items-center sm:items-start p-8 sm:p-20">
+                {children}
+              </main>
+            </ItemContextProvider>
+          </DateContextProvider>
           <Footer />
         </div>
       </body>

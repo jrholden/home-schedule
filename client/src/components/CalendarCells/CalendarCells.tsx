@@ -3,41 +3,42 @@ import { format, startOfMonth, endOfMonth, startOfWeek, endOfWeek, addDays, isSa
 import styles from '@components/Calendar/Calendar.module.css';
 
 interface CalendarCellsProps {
+  currentMonthData: any;
   currentMonth: Date;
 }
 
-const CalendarCells: React.FC<CalendarCellsProps> = ({ currentMonth }) => {
-  const monthStart = startOfMonth(currentMonth);
-  const monthEnd = endOfMonth(currentMonth);
-  const startDate = startOfWeek(monthStart);
-  const endDate = endOfWeek(monthEnd);
+const CalendarCells: React.FC<CalendarCellsProps> = ({ currentMonth, currentMonthData }) => {
+  if (!currentMonthData) {
+    return <div>Loading...</div>;
+  }
 
-  const rows = [];
-  let days = [];
-  let day = startDate;
-  let formattedDate = '';
+  let rows = [];
+  let cols = [];
+  let currentDay:Date = currentMonthData[0][0].date;
 
-  while (day <= endDate) {
-    for (let i = 0; i < 7; i++) {
-      formattedDate = format(day, 'd');
-      const cloneDay = day;
-      days.push(
+  for (let i = 0; i < currentMonthData.length; i++) {
+    let weeks = currentMonthData[i];
+    let key = '';
+    for (let j = 0; j < weeks.length; j++) {
+      currentDay = weeks[j].date;
+      let formattedDate = format(currentDay, 'd');
+      key=currentDay.toString();
+      cols.push(
         <div
-          className={`col cell ${styles.col} ${styles.cell} ${!isSameMonth(day, currentMonth) ? styles.disabled : isSameDay(day, new Date()) ? styles.selected : ''}`}
-          key={day.toString()}
-          onClick={() => console.log(format(cloneDay, 'yyyy-MM-dd'))}
+          className={`col cell ${styles.col} ${styles.cell} ${!isSameMonth(currentDay, currentMonth) ? styles.disabled : isSameDay(currentDay, new Date()) ? styles.selected : ''}`}
+          key={key}
+          onClick={() => console.log(format(currentDay, 'yyyy-MM-dd'))}
         >
           <span className="number">{formattedDate}</span>
         </div>
       );
-      day = addDays(day, 1);
     }
     rows.push(
-      <div className={`${styles.row} row`} key={day.toString()}>
-        {days}
+      <div className={`${styles.row} row`} key={key}>
+        {cols}
       </div>
     );
-    days = [];
+    cols = [];
   }
   return <div className={styles.body}>{rows}</div>;
 };
