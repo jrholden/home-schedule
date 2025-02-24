@@ -1,0 +1,43 @@
+services:
+  app:
+    build:
+      context: .
+      args:
+        NODE_PORT: ${NODE_PORT}        
+      dockerfile: ./server/Dockerfile
+    container_name: node
+    ports:
+      - "${NODE_CONTAINER_PORT}:${NODE_PORT}"
+    environment:
+      - NODE_PORT=${NODE_PORT}
+    volumes:
+      - app_data:/app/data
+    networks:
+      - app_network
+    depends_on:
+      - mongo
+  mongo:
+    build:
+      context: .
+      dockerfile: ./database/Dockerfile
+    container_name: mongo
+    ports:
+      - "${MONGO_CONTAINER_PORT}:${MONGO_PORT}"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
+      - GLIBC_TUNABLES=${GLIBC_TUNABLES}
+    volumes:
+      - ./database/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+      - ./database/data/dev:/docker-entrypoint-initdb.d/data-stage:ro
+      - mongo_data:/data/db
+    networks:
+      - app_network
+
+volumes:
+  mongo_data:
+  app_data:
+networks:
+  app_network:
+    driver: bridge
+

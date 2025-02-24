@@ -1,0 +1,29 @@
+.footer {
+  background-color: #333;
+  color: white;
+  padding: 1rem;
+  text-align: center;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  gap: 2rem; /* Add some space between the links */
+}
+
+.footer a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+.footer .icon {
+  margin-right: 0.5rem;
+}

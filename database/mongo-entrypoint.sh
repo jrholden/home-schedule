@@ -10,4 +10,4 @@ rm -rf /data/db/*
 ulimit -n 64000
 
 # Start MongoDB with authentication
-exec /usr/local/bin/docker-entrypoint.sh mongod --auth
+exec /usr/local/bin/docker-entrypoint.sh mongod --auth --config /etc/mongod.conf --verbose

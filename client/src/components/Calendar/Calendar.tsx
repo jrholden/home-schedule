@@ -1,7 +1,8 @@
-'use client'; 
+'use client';
 import React, { useState } from 'react';
 import { format, addMonths, subMonths, startOfMonth, endOfMonth, startOfWeek, endOfWeek, addDays, isSameMonth, isSameDay } from 'date-fns';
 import styles from './Calendar.module.css';
+import DataFetcher from '../DataFetcher/DataFetcher';
 
 const Calendar: React.FC = () => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
@@ -76,10 +77,13 @@ const Calendar: React.FC = () => {
   };
 
   return (
-    <div className={styles.calendar}>
-      {renderHeader()}
-      {renderDays()}
-      {renderCells()}
+    <div>
+      <div className={styles.calendar}>
+        {renderHeader()}
+        {renderDays()}
+        {renderCells()}
+      </div>
+      <DataFetcher />
     </div>
   );
 };
