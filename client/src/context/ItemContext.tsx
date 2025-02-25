@@ -35,7 +35,12 @@ export const ItemContextProvider = ({ children }: { children: React.ReactNode })
     try {
       setLoading(true);
       const savedItem = await ItemService.saveItem(newItem);
-      setItems((prevItems: any) => [...prevItems, savedItem]);
+      if(currentMonth.getMonth()+1 === newItem.startDate.getMonth()+1 && currentMonth.getFullYear() === newItem.startDate.getFullYear()){
+        setItems((prevItems: any) => [...prevItems, savedItem]);
+      }else{
+        setItems((prevItems: any) => [...prevItems]);
+      }
+      
     } catch (err) {
       setError('Failed to fetch data + ' + err);
     } finally {
