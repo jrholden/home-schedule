@@ -29,7 +29,7 @@ export const ItemContextProvider = ({ children }: { children: React.ReactNode })
       }
     };
     fetchItems();
-  }, []);
+  }, [currentMonth]);
 
   const addItem = async (newItem: any) => {
     try {
