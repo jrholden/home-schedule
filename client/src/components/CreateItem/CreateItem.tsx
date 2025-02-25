@@ -1,19 +1,23 @@
 import React, { useState } from 'react';
 import useItemContext from '@/hooks/useItemContext';
-import {ItemType} from '@shared/enums';
+import ItemTypeDropdown from '@components/ItemTypeDropdown/ItemTypeDropdown';
+import { ItemType } from '@shared/enums';
 
 const CreateItem: React.FC = () => {
   const { addItem } = useItemContext();
   const [title, setTitle] = useState('');
-  const [date, setDate] = useState('');
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');  
+  const [itemType, setItemType] = useState<ItemType>(ItemType.TypeA);
 
-  console.log(ItemType.TypeA);
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (title && date) {
-      addItem({ title, date });
+    if (title && startDate && endDate) {
+      addItem({ title, startDate, endDate, itemType });
       setTitle('');
-      setDate('');
+      setStartDate('');
+      setEndDate('');
+      setItemType(ItemType.TypeA);
     }
   };
 
@@ -32,15 +36,26 @@ const CreateItem: React.FC = () => {
           />
         </div>
         <div>
-          <label htmlFor="date">Date:</label>
+          <label htmlFor="date">Start Date:</label>
           <input
             type="date"
             id="date"
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
+            value={startDate}
+            onChange={(e) => setStartDate(e.target.value)}
             required
           />
         </div>
+        <div>
+          <label htmlFor="date">End Date:</label>
+          <input
+            type="date"
+            id="date"
+            value={endDate}
+            onChange={(e) => setEndDate(e.target.value)}
+            required
+          />
+        </div>
+        <ItemTypeDropdown value={itemType} onChange={setItemType} />
         <button type="submit">Create Item</button>
       </form>
     </div>

@@ -5,29 +5,21 @@ const Schema = mongoose.Schema;
 
 const itemSchema = new Schema(
   {
-    name: {
+    title: {
       type: String,
       required: true,
     },
-    dateInfo: {
-      startDate: {
-        type: Date,
-        required: true,
-      },
-      endDate: {
-        type: Date,
-        required: true,
-      }
+    startDate: {
+      type: Date,
+      required: true,
     },
-    itemInfo: {
-      type: {
-        type: String,
-        required: true,
-      },
-      createdBy: {
-        type: String,
-        required: true,
-      },
+    endDate: {
+      type: Date,
+      required: true,
+    },
+    itemType: {
+      type: String,
+      required: true,
     },
   },
   { timestamps: true }

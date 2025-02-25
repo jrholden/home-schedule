@@ -11,7 +11,7 @@ const ItemContext = createContext({
 });
 
 export const ItemContextProvider = ({ children }: { children: React.ReactNode }) => {
-  const [items, setItems] = useState<any>(null);
+  const [items, setItems] = useState<any>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -32,10 +32,8 @@ export const ItemContextProvider = ({ children }: { children: React.ReactNode })
   const addItem = async (newItem: any) => {
     try {
       setLoading(true);
-      const result = await ItemService.saveItem(newItem);
-      console.log(result);
-      console.log(items);
-      //setItems((prevItems: any) => [...prevItems, newItem]);
+      const savedItem = await ItemService.saveItem(newItem);
+      setItems((prevItems: any) => [...prevItems, savedItem]);
     } catch (err) {
       setError('Failed to fetch data + ' + err);
     } finally {

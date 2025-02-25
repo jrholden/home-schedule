@@ -13,7 +13,6 @@ const DataFetcher: React.FC = () => {
   if (loading) {
     return <div>Loading...</div>;
   }
-
   return (
     <div>
       <h1>{month}</h1>

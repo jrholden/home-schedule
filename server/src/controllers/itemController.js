@@ -15,12 +15,12 @@ const getItems = async (req, res) => {
 };
 
 const saveItem = async (req, res) => {
-  console.log("Saving item...");
-  console.log(ItemType.TypeA);
+  const { title, startDate, endDate, itemType } = req.body;
+  console.log("Saving item: " + title);
   try {
-    const newItem = new Item(req.body);
-    //const savedItem = await newItem.save();
-    res.status(201).json({message: "PENIS"});
+    const newItem = new Item({title, startDate, endDate, itemType});
+    const savedItem = await newItem.save();
+    res.status(201).json(savedItem._id);
   } catch (error) {
     console.error("Error saving item: ", error);
     res.status(400).json({ error: error.message });
