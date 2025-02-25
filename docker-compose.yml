@@ -1,5 +1,5 @@
 services:
-  app:
+  node:
     build:
       context: .
       args:
