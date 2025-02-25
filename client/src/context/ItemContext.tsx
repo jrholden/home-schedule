@@ -35,7 +35,7 @@ export const ItemContextProvider = ({ children }: { children: React.ReactNode })
       const result = await ItemService.saveItem(newItem);
       console.log(result);
       console.log(items);
-      setItems((prevItems: any) => [...prevItems, newItem]);
+      //setItems((prevItems: any) => [...prevItems, newItem]);
     } catch (err) {
       setError('Failed to fetch data + ' + err);
     } finally {
