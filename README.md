@@ -10,6 +10,7 @@ Ensure you have the following environment variables set up in your `.env` files.
 
 Create a `.env` file in the `project root` directory with something like:
 
+```env
 [Database]
 MONGO_INITDB_ROOT_USERNAME=admin
 MONGO_INITDB_ROOT_PASSWORD=adminpassword
@@ -23,11 +24,13 @@ REACT_CONTAINER_PORT=9194
 REACT_PORT=3000
 [Config]
 GLIBC_TUNABLES=glibc.pthread.rseq=0
+```
 
 #### Server Environment Variables (`server/.env`)
 
 Create a `.env` file in the `server` directory with something like:
 
+```env
 [Server]
 PORT=3001
 [Database]
@@ -36,15 +39,17 @@ DATABASE_URI='mongodb://admin:adminpassword@mongo:28018/home_schedule?serverSele
 [Config]
 NODE_ENV=development
 CORS_ORIGIN=http://localhost:3000
+```
 
 #### Client Environment Variables (`client/.env.local`)
 
 Create a `.env.local` file in the `client` directory with something like:
 
+```env
 [Backend]
 NEXT_PUBLIC_API_URL=http://localhost:9195
 #NEXT_PUBLIC_API_URL=http://localhost:3001 
-
+```
 
 ### Running the API and MongoDB with Docker Compose
 
