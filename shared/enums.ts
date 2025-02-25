@@ -1,5 +1,5 @@
 export enum ItemType {
-  TypeA = "Finacial",
+  TypeA = "Financial",
   TypeB = "Maintenance",
   TypeC = "Security + Safety",
   TypeD = "Administrative",

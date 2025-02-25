@@ -2,6 +2,7 @@
 
 import { createContext, useState, useEffect } from "react";
 import { ItemService } from '@services/ItemService';
+import useDateContext from "@hooks/useDateContext";
 
 
 const ItemContext = createContext({
@@ -11,6 +12,7 @@ const ItemContext = createContext({
 });
 
 export const ItemContextProvider = ({ children }: { children: React.ReactNode }) => {
+  const {currentMonth} = useDateContext();
   const [items, setItems] = useState<any>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -18,7 +20,7 @@ export const ItemContextProvider = ({ children }: { children: React.ReactNode })
   useEffect(() => {
     const fetchItems = async () => {
       try {
-        const result = await ItemService.getItems();
+        const result = await ItemService.getItems(currentMonth);
         setItems(result);
       } catch (err) {
         setError('Failed to fetch data + ' + err);

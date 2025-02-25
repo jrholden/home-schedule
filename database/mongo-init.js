@@ -18,7 +18,7 @@ db.items.insertMany([
     title: 'Pay Property Tax',
     startDate: ISODate('2025-02-12T00:00:00.000Z'),
     endDate: ISODate('2025-02-12T00:00:00.000Z'),
-    itemType: 'Finacial',
+    itemType: 'Financial',
     createdAt: ISODate('2025-02-25T17:35:20.452Z'),
     updatedAt: ISODate('2025-02-25T17:35:20.452Z'),
     __v: 0

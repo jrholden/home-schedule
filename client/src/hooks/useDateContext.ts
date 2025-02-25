@@ -1,7 +1,7 @@
 import {useContext} from "react";
 import DateContext from "@context/DateContext";
 
-const useItemContext = () => {
+const useDateContext = () => {
   const context = useContext(DateContext);
 
   if (!context) {
@@ -10,4 +10,4 @@ const useItemContext = () => {
   return context;
 };
 
-export default useItemContext;
+export default useDateContext;
