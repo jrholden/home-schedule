@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",               // or your preferred target
+    "module": "esnext",          // or your preferred module system
+    "outDir": "./dist",            // Output directory for compiled JS files
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": [                   // Include all files in the src directory
+    "shared/**/*.ts"           // Include all TypeScript files in the shared directory
+  ],
+  "exclude": ["node_modules"]      // Exclude node_modules
+}

@@ -1,4 +1,6 @@
-const Item = require('../models/Item');
+import Item from "../models/Item.js";
+//We put this in root during docker image build
+import { ItemType } from "../shared/enums.js";
 
 const getItems = async (req, res) => {
   console.log("Getting items...");
@@ -14,7 +16,7 @@ const getItems = async (req, res) => {
 
 const saveItem = async (req, res) => {
   console.log("Saving item...");
-  console.log(req.body);
+  console.log(ItemType.TypeA);
   try {
     const newItem = new Item(req.body);
     //const savedItem = await newItem.save();
@@ -25,7 +27,7 @@ const saveItem = async (req, res) => {
   }
 };
 
-module.exports = {
-  getItems,
-  saveItem
+export { 
+  getItems, 
+  saveItem 
 };

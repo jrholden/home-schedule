@@ -5,13 +5,19 @@ WORKDIR /app
 
 # Copy package.json and package-lock.json
 COPY /server/package*.json ./
+COPY /server/tsconfig.json ./
 COPY /server/.env ./
 
 # Install dependencies
-RUN npm install --omit=dev
+RUN npm install
 
 # Copy the rest of the application files
+
 COPY /server/src/. .
+COPY /shared ./shared
+RUN npx tsc
+RUN cp -r ./dist/* ./shared
+RUN rm -rf ./dist
 
 # Load environment variables
 ARG NODE_PORT

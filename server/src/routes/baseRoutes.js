@@ -1,7 +1,7 @@
-const express = require('express')
-
+import express from 'express'
 //import routes
-const itemRoutes = require('./itemRoutes')
+import itemRoutes from './itemRoutes.js'
+
 const router = express.Router()
 
 router.all('/', (req, res) => {
@@ -15,4 +15,4 @@ router.all('/', (req, res) => {
 })
 router.use('/items', itemRoutes)
 
-module.exports = router
+export default router; 

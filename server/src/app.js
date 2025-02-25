@@ -1,20 +1,28 @@
-const express = require('express');
-const cors = require('cors');
-const path = require('path')
+import express from 'express';
+import cors from 'cors';
+import path from 'path';
+import dotenv from 'dotenv';
+import mongoose from 'mongoose';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+import connectDB from './config/database.js';
+//import routes
+import baseRoutes from './routes/baseRoutes.js';
 
-const dotenv = require('dotenv');
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 9595;
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const corsOptions = {
     origin: process.env.CORS_ORIGIN || 'http://localhost:3000',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
 };
-const connectDB = require('./config/database');
-const mongoose = require('mongoose')
+
 connectDB()
 
 console.log(process.env.NODE_ENV)
@@ -33,8 +41,7 @@ app.use((req, res, next) => {
 });
 app.use('/', express.static(path.join(__dirname, 'public')))
 
-//import routes
-const baseRoutes = require('./routes/baseRoutes')
+
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'index.html'))

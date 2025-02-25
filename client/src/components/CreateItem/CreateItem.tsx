@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import useItemContext from '@/hooks/useItemContext';
+import {ItemType} from '@shared/enums';
 
 const CreateItem: React.FC = () => {
   const { addItem } = useItemContext();
   const [title, setTitle] = useState('');
   const [date, setDate] = useState('');
 
+  console.log(ItemType.TypeA);
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (title && date) {

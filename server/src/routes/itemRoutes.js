@@ -1,8 +1,5 @@
-const express = require('express')
-const {
-  getItems,
-  saveItem
-} = require('../controllers/itemController');
+import express from 'express';
+import {getItems, saveItem} from '../controllers/itemController.js';
 
 
 const router = express.Router();
@@ -20,5 +17,5 @@ router.all('/', (req, res) => {
 router.get('/get', getItems);
 router.post('/save', saveItem);
 
-module.exports = router
+export default router; 
 
