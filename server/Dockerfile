@@ -21,4 +21,4 @@ ENV PORT=${NODE_PORT}
 EXPOSE ${PORT}
 
 # Define the command to run the application
-CMD ["sh", "-c", "sleep 10 && node app.js"]
+CMD ["sh", "-c", "sleep 5 && node app.js"]

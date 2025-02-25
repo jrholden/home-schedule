@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import useItemContext from '@/hooks/useItemContext';
 import useDateContext from '@/hooks/useDateContext';
+import CreateItem from '../CreateItem/CreateItem';
 
 const DataFetcher: React.FC = () => {
   const {items, loading, addItem} = useItemContext();
@@ -17,6 +18,7 @@ const DataFetcher: React.FC = () => {
     <div>
       <h1>{month}</h1>
       <pre>{JSON.stringify(items, null, 2)}</pre>
+      <CreateItem />
     </div>
   );
 };

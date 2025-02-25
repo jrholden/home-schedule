@@ -26,7 +26,9 @@ app.use(express.urlencoded({ extended: true }));
 
 // Log all request headers
 app.use((req, res, next) => {
-    console.log(req.headers);
+    console.log("Request URL: " + req.url + " | Request Method: " + req.method);
+    console.log("Request Body: ");
+    console.log(req.body);
     next();
 });
 app.use('/', express.static(path.join(__dirname, 'public')))

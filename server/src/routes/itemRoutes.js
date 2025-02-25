@@ -1,9 +1,24 @@
 const express = require('express')
 const {
   getItems,
-} = require('../controllers/itemController')
+  saveItem
+} = require('../controllers/itemController');
 
 
-const router = express.Router()
+const router = express.Router();
 
-router.get('/', getItems)
+router.all('/', (req, res) => {
+  console.log("URL: /api/");
+  res.status(404)
+  if (req.accepts('json')) {
+    res.json({ message: '404 not Found', status: 404 })
+  } else {
+    res.type('txt').send('404 Not Found')
+  }
+});
+
+router.get('/get', getItems);
+router.post('/save', saveItem);
+
+module.exports = router
+

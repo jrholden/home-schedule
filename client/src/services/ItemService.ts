@@ -9,5 +9,13 @@ export const ItemService =  {
     } catch (err:any) {
       throw new Error(err);
     }
+  },
+  saveItem: async (data:any) => {
+    try {
+      const items = await Backend.post('/items/save', data);
+      return items;
+    } catch (err:any) {
+      throw new Error(err);
+    }
   }
 };

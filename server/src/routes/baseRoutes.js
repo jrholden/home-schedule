@@ -1,10 +1,18 @@
 const express = require('express')
-const {
-  getItems,
-} = require('../controllers/itemController')
 
+//import routes
+const itemRoutes = require('./itemRoutes')
 const router = express.Router()
 
-router.use('/items', getItems)
+router.all('/', (req, res) => {
+  console.log("URL: /api/");
+  res.status(404)
+  if (req.accepts('json')) {
+    res.json({ message: '404 not Found', status: 404 })
+  } else {
+    res.type('txt').send('404 Not Found')
+  }
+})
+router.use('/items', itemRoutes)
 
 module.exports = router
