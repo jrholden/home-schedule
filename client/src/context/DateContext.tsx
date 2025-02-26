@@ -15,10 +15,9 @@ export const DateContextProvider = ({ children }: { children: React.ReactNode })
   const [currentMonth, setCurrentMonth] = useState((new Date()));
   const [dateData, setDateData] = useState<any>([]);
   useEffect(() => {
+    console.log("DATECONTEXT USE EFFECT BBABY");
     const formattedCurrentMonth = new Date(formatDateWithTimezone(currentMonth));
-
     const weeks = generateWeeks(formattedCurrentMonth);
-    console.log(weeks);
     setDateData(weeks);
   }, [currentMonth]);
 
@@ -30,7 +29,6 @@ export const DateContextProvider = ({ children }: { children: React.ReactNode })
 
     const weeks = [];
     let day = startDate;
-    console.log(day)
     while (day <= endDate) {
       let days: any = {};
       for (let i = 0; i < 7; i++) {

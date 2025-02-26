@@ -29,7 +29,6 @@ export const ItemService = {
   },
   saveItem: async (data: any) => {
     try {
-      console.log(data)
       const savedItemId = await Backend.post('/items/save', data);
       return savedItemId;
     } catch (err: any) {

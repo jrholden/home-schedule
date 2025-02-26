@@ -19,6 +19,8 @@ export const ItemContextProvider = ({ children }: { children: React.ReactNode })
 
   useEffect(() => {
     const fetchItems = async () => {
+      
+    console.log("ITEMCONTEXT ITEM ITEM CONTEXT FUCK YEAH");
       let result: any;
       try {
         setLoading(true);
@@ -31,7 +33,6 @@ export const ItemContextProvider = ({ children }: { children: React.ReactNode })
         setError('Failed to fetch data + ' + err);
       } finally {
         if (result) {
-          console.log(result );
           setLoading(false);
         }
       }
@@ -43,12 +44,7 @@ export const ItemContextProvider = ({ children }: { children: React.ReactNode })
     try {
       setLoading(true);
       const savedItem = await ItemService.saveItem(newItem);
-      console.log(savedItem);
-      if (currentMonth.getMonth() + 1 === newItem.startDate.getMonth() + 1 && currentMonth.getFullYear() === newItem.startDate.getFullYear()) {
-        setItems((prevItems: any) => [...prevItems, savedItem]);
-      } else {
-        setItems((prevItems: any) => [...prevItems]);
-      }
+      resetDateData();
 
     } catch (err) {
       setError('Failed to fetch data + ' + err);

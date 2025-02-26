@@ -22,7 +22,6 @@ const CalendarCells: React.FC<CalendarCellsProps> = () => {
   let rows: any[] = [];
   let cols: any[] = [];
 
-  console.log(items)
   for (let i = 0; i < items.length; i++) {
     const week = items[i];
     let rowKey = "row-" + i;
@@ -30,8 +29,6 @@ const CalendarCells: React.FC<CalendarCellsProps> = () => {
       let currentDay = new Date(formatDateWithTimezone(date));
       let currentDayItemCount = 0;
       let formattedDate = format(currentDay, 'd');
-      console.log(currentDay);
-      console.log(formattedDate);
       if ((items as any[]).length > 0) {
         currentDayItemCount = (items as any[]).length;
       }

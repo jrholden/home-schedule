@@ -11,7 +11,6 @@ export function getWeekOfMonth(date: Date): number {
 export const formatDateWithTimezone = (date: Date | string): string => {
   let zonedDate;
   if (typeof date === 'string' && !date.includes('T')) {
-    console.log(date);
     zonedDate = toZonedTime(`${date}T00:00:00`, tz);
   } else {
     zonedDate = toZonedTime(new Date(date), tz);
