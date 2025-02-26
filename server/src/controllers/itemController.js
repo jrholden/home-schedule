@@ -24,11 +24,11 @@ const getItems = async (req, res) => {
           { $eq: [{ $year: "$startDate" }, year] }
         ]
       }
-    },{_id: 1}).lean().exec();
+    }).lean().exec();
 
-    const idArray = items.map(doc => doc._id);
+    const itemArray = items.map(doc => {return {date:doc.startDate, item: {_id: doc._id, itemType: doc.itemType}}});
 
-    res.status(200).json({ items: idArray });
+    res.status(200).json({ items: itemArray });
   } catch (error) {
     console.error("Error getting items: ", error);
     res.status(400).json({ error: error.message });

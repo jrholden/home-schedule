@@ -16,7 +16,6 @@ const DataFetcher: React.FC = () => {
   return (
     <div>
       <h1>{month}</h1>
-      <pre>{JSON.stringify(items, null, 2)}</pre>
       <CreateItem />
     </div>
   );

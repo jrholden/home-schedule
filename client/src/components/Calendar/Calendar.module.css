@@ -41,6 +41,9 @@
 .disabled {
   color: #ccc;
 }
+.bold{
+  font-weight: bold;
+}
 
 .selected {
   background-color: #0070f3;

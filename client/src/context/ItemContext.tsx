@@ -12,7 +12,7 @@ const ItemContext = createContext({
 });
 
 export const ItemContextProvider = ({ children }: { children: React.ReactNode }) => {
-  const {currentMonth} = useDateContext();
+  const {currentMonth, dateData} = useDateContext();
   const [items, setItems] = useState<any>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -20,7 +20,9 @@ export const ItemContextProvider = ({ children }: { children: React.ReactNode })
   useEffect(() => {
     const fetchItems = async () => {
       try {
-        const result = await ItemService.getItems(currentMonth);
+        const result = await ItemService.getItems(currentMonth, dateData);
+        console.log("RESULT");
+        console.log(result);
         setItems(result);
       } catch (err) {
         setError('Failed to fetch data + ' + err);
@@ -29,7 +31,7 @@ export const ItemContextProvider = ({ children }: { children: React.ReactNode })
       }
     };
     fetchItems();
-  }, [currentMonth]);
+  }, [currentMonth, dateData]);
 
   const addItem = async (newItem: any) => {
     try {

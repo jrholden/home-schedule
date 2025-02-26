@@ -33,6 +33,7 @@ export const DateContextProvider = ({ children }: { children: React.ReactNode })
     setDateData(weeks);
   }, [currentMonth]);
 
+
   const setMonthFocus = (date: Date) => {
     setCurrentMonth(date);
   };

@@ -10,6 +10,14 @@ const CreateItem: React.FC = () => {
   const [endDate, setEndDate] = useState('');  
   const [itemType, setItemType] = useState<ItemType>(ItemType.TypeA);
 
+  const handleStartDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newStartDate = e.target.value;
+    setStartDate(newStartDate);
+    if (!endDate || new Date(endDate) < new Date(newStartDate)) {
+      setEndDate(newStartDate);
+    }
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (title && startDate && endDate) {
@@ -41,7 +49,7 @@ const CreateItem: React.FC = () => {
             type="date"
             id="date"
             value={startDate}
-            onChange={(e) => setStartDate(e.target.value)}
+            onChange={(e) => handleStartDateChange(e)}
             required
           />
         </div>
