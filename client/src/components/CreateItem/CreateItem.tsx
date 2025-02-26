@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import useItemContext from '@/hooks/useItemContext';
 import ItemTypeDropdown from '@components/ItemTypeDropdown/ItemTypeDropdown';
 import { ItemType } from '@shared/enums';
+import { formatDateWithTimezone } from '@/utils/dateUtils';
 
 const CreateItem: React.FC = () => {
   const { addItem } = useItemContext();
@@ -21,7 +22,9 @@ const CreateItem: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (title && startDate && endDate) {
-      addItem({ title, startDate, endDate, itemType });
+      let betterStartDate = formatDateWithTimezone(startDate);
+      let betterEndDate = formatDateWithTimezone(endDate);
+      addItem({title: title, startDate: betterStartDate, endDate: betterEndDate, itemType:itemType});
       setTitle('');
       setStartDate('');
       setEndDate('');

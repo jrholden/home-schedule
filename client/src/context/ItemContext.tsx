@@ -12,22 +12,28 @@ const ItemContext = createContext({
 });
 
 export const ItemContextProvider = ({ children }: { children: React.ReactNode }) => {
-  const {currentMonth, dateData} = useDateContext();
+  const { currentMonth, dateData, resetDateData } = useDateContext();
   const [items, setItems] = useState<any>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchItems = async () => {
+      let result: any;
       try {
-        const result = await ItemService.getItems(currentMonth, dateData);
-        console.log("RESULT");
-        console.log(result);
-        setItems(result);
+        setLoading(true);
+        if (dateData && dateData.length > 0) {
+          result = await ItemService.getItems(currentMonth, dateData);
+          setItems(result);
+        }
+
       } catch (err) {
         setError('Failed to fetch data + ' + err);
       } finally {
-        setLoading(false);
+        if (result) {
+          console.log(result );
+          setLoading(false);
+        }
       }
     };
     fetchItems();
@@ -37,12 +43,13 @@ export const ItemContextProvider = ({ children }: { children: React.ReactNode })
     try {
       setLoading(true);
       const savedItem = await ItemService.saveItem(newItem);
-      if(currentMonth.getMonth()+1 === newItem.startDate.getMonth()+1 && currentMonth.getFullYear() === newItem.startDate.getFullYear()){
+      console.log(savedItem);
+      if (currentMonth.getMonth() + 1 === newItem.startDate.getMonth() + 1 && currentMonth.getFullYear() === newItem.startDate.getFullYear()) {
         setItems((prevItems: any) => [...prevItems, savedItem]);
-      }else{
+      } else {
         setItems((prevItems: any) => [...prevItems]);
       }
-      
+
     } catch (err) {
       setError('Failed to fetch data + ' + err);
     } finally {

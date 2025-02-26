@@ -2,52 +2,60 @@ import React from 'react';
 import { format, startOfMonth, endOfMonth, startOfWeek, endOfWeek, addDays, isSameMonth, isSameDay } from 'date-fns';
 import styles from '@components/Calendar/Calendar.module.css';
 import useItemContext from '@/hooks/useItemContext';
+import useDateContext from '@/hooks/useDateContext';
+import { formatDateWithTimezone } from '@/utils/dateUtils';
 
 interface CalendarCellsProps {
-  currentMonthData: any;
-  currentMonth: Date;
+
 }
 
-const CalendarCells: React.FC<CalendarCellsProps> = ({ currentMonth, currentMonthData }) => {
-  const {items, loading} = useItemContext();
-  const onCellClick = (dateData: any) => {
-    console.log(dateData);
+const CalendarCells: React.FC<CalendarCellsProps> = () => {
+  const { currentMonth } = useDateContext();
+  const { items, loading } = useItemContext();
+  const onCellClick = (dateItems: any) => {
+    console.log(dateItems);
   };
   if (loading) {
     return <div>Loading...</div>;
   }
-  if(items){
-    currentMonthData = items;
-  }
 
-  let rows = [];
-  let cols = [];
+  let rows: any[] = [];
+  let cols: any[] = [];
 
-  for (let i = 0; i < currentMonthData.length; i++) {
-    let weeks = currentMonthData[i];
-    let key = '';
-    for (let j = 0; j < weeks.length; j++) {
-      let currentDay = weeks[j].date;
-      let currentDayItemCount = weeks[j].items.length;
+  console.log(items)
+  for (let i = 0; i < items.length; i++) {
+    const week = items[i];
+    let rowKey = "row-" + i;
+    for (const [date, items] of Object.entries(week)) {
+      let currentDay = new Date(formatDateWithTimezone(date));
+      let currentDayItemCount = 0;
       let formattedDate = format(currentDay, 'd');
-      key=currentDay.toString();
+      console.log(currentDay);
+      console.log(formattedDate);
+      if ((items as any[]).length > 0) {
+        currentDayItemCount = (items as any[]).length;
+      }
+      let colKey = currentDay.toString();
+
       cols.push(
         <div
           className={`col cell ${styles.col} ${styles.cell} ${!isSameMonth(currentDay, currentMonth) ? styles.disabled : isSameDay(currentDay, new Date()) ? styles.selected : ''}`}
-          key={key}
-          onClick={() => onCellClick(weeks[j])}
+          key={colKey}
+          onClick={() => onCellClick(items)}
         >
           <span className={`number ${currentDayItemCount > 0 ? styles.bold : ''}`}>{formattedDate}</span>
         </div>
       );
     }
     rows.push(
-      <div className={`${styles.row} row`} key={key}>
+      <div className={`${styles.row} row`} key={rowKey}>
         {cols}
       </div>
     );
     cols = [];
   }
+
+
   return <div className={styles.body}>{rows}</div>;
 };
 

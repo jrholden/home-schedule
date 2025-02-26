@@ -29,7 +29,7 @@ const Calendar: React.FC = () => {
           onNextMonth={handleNextMonth}
         />
         <CalendarDays />
-        <CalendarCells currentMonth={currentMonth} currentMonthData={dateData} />
+        <CalendarCells />
       </div>
       <DataFetcher />
     </div>

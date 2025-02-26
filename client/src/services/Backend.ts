@@ -10,7 +10,6 @@ export const Backend = {
       },
       ...options,
     });
-    console.log(response)
     return response.json();
   },
 

@@ -1,18 +1,26 @@
 import { Backend } from './Backend';
-
+import { format, startOfMonth, endOfMonth, startOfWeek, endOfWeek, addDays, isSameMonth, isSameDay } from 'date-fns';
+import { getWeekOfMonth } from '@utils/dateUtils';
 export const ItemService = {
   // Service logic here
-  getItems: async (currentMonth: Date, dateData?:any[]) => {
+  getItems: async (currentMonth: Date, dateData: any[]) => {
     const formattedDate = encodeURIComponent(currentMonth.toISOString());
     try {
-      const result = await Backend.get(`/items/get?currentMonth=${formattedDate}`);
-      if(dateData){
-        for (let i = 0; i < result.items.length; i++) {
-          const itemDate = new Date(result.items[i].date);
-          const itemWeek = Math.floor((itemDate.getDate() - 1) / 7);
-          const itemDay = itemDate.getDay();
-          dateData[itemWeek][itemDay].items.push(result.items[i].item);
-        }  
+      
+      if (dateData?.length > 0) {
+        let mockDateData:any[] = dateData.map(obj => ({ ...obj }));;
+        //create copy so we don't mutate the original
+        mockDateData = dateData.map(obj => ({ ...obj }));
+        const result = await Backend.get(`/items/get?currentMonth=${formattedDate}`);
+        if (result.items) {
+          result.items.map((item: any) => {
+            const realDate = new Date(item.date);
+            const key = format(realDate, 'yyyy-MM-dd');
+            const weekIndex = getWeekOfMonth(realDate) - 1;
+            mockDateData[weekIndex][key].push(item.item);
+          });
+          return mockDateData;
+        }
       }
       return dateData;
     } catch (err: any) {
@@ -21,6 +29,7 @@ export const ItemService = {
   },
   saveItem: async (data: any) => {
     try {
+      console.log(data)
       const savedItemId = await Backend.post('/items/save', data);
       return savedItemId;
     } catch (err: any) {

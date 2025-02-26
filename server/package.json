@@ -19,6 +19,7 @@
   "homepage": "https://github.com/jrholden/home-schedule#readme",
   "dependencies": {
     "cors": "^2.8.5",
+    "date-fns-tz": "^3.2.0",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "mongoose": "^8.10.1"

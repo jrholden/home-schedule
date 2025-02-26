@@ -1,6 +1,8 @@
 import Item from "../models/Item.js";
+import { toZonedTime, format } from 'date-fns-tz';
 //We put this in root during docker image build
 import { ItemType } from "../shared/enums.js";
+import { TIMEZONE } from "../shared/constants.js";
 
 const getItems = async (req, res) => {
   console.log("Getting items...");
@@ -8,13 +10,13 @@ const getItems = async (req, res) => {
   if (!dateParam) {
     return res.status(400).json({ error: "Date parameter is required" });
   }
-  const date = new Date(dateParam);
+  const date = toZonedTime(new Date(dateParam), TIMEZONE);
   if (isNaN(date.getTime())) {
     return res.status(400).json({ error: "Invalid date format" });
   }
 
-  const month = date.getMonth() + 1; // getMonth() is zero-based
-  const year = date.getFullYear();
+  const month = format(date, 'M');
+  const year = format(date, 'yyyy');
 
   try {
     const items = await Item.find({
