@@ -19,7 +19,7 @@ const BasicModal: FC<BasicModalProps> = ({ open, handleClose, title, text, actio
       <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
         <div className={styles.modalHeader}>
           {titleSection ? titleSection : <h2>{title}</h2>}
-          <button className={styles.modalClose} onClick={handleClose}>
+          <button className={`${styles.modalClose} ${styles.modalCloseBtn}`} onClick={handleClose}>
             &times;
           </button>
         </div>

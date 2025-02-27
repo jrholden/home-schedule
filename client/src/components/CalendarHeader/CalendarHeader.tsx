@@ -11,15 +11,15 @@ interface CalendarHeaderProps {
 const CalendarHeader: React.FC<CalendarHeaderProps> = ({ currentMonth, onPrevMonth, onNextMonth }) => {
   return (
     <div className={`${styles.header} row flex-middle`}>
-      <div className={`${styles.col} col col-start`} onClick={onPrevMonth}>
+      <button className={`${styles.col} col col-start`} onClick={onPrevMonth}>
         <div className="icon">back</div>
-      </div>
+      </button>
       <div className={`${styles.col} col col-center`}>
         <span>{format(currentMonth, 'MMMM yyyy')}</span>
       </div>
-      <div className={`${styles.col} col col-end`} onClick={onNextMonth}>
+      <button className={`${styles.col} col col-end`} onClick={onNextMonth}>
         <div className="icon">next</div>
-      </div>
+      </button>
     </div>
   );
 };

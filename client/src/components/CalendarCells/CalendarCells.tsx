@@ -6,6 +6,8 @@ import useDateContext from '@/hooks/useDateContext';
 import { formatDateWithTimezone } from '@/utils/dateUtils';
 import BasicModal from '@components/BasicModal/BasicModal';
 
+import CreateItem from '../CreateItem/CreateItem';
+
 interface CalendarCellsProps {
 
 }
@@ -70,6 +72,7 @@ const CalendarCells: React.FC<CalendarCellsProps> = () => {
             <li key={index}>{item._id}</li>
           ))}
         </ul>
+        <CreateItem />
       </BasicModal>
     </div>
   )

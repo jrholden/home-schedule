@@ -3,6 +3,7 @@ import useItemContext from '@/hooks/useItemContext';
 import ItemTypeDropdown from '@components/ItemTypeDropdown/ItemTypeDropdown';
 import { ItemType } from '@shared/enums';
 import { formatDateWithTimezone } from '@/utils/dateUtils';
+import styles from './CreateItem.module.css';
 
 const CreateItem: React.FC = () => {
   const { addItem } = useItemContext();
@@ -33,21 +34,22 @@ const CreateItem: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className={styles.formContainer}>
       <h1>Create Item</h1>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="title">Title:</label>
+        <div className={styles.formGroup}>
+          <label htmlFor="title" className={styles.formLabel}>Title:</label>
           <input
             type="text"
             id="title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
+            className={styles.formInput}
             required
           />
         </div>
-        <div>
-          <label htmlFor="date">Start Date:</label>
+        <div className={styles.formGroup}>
+          <label htmlFor="date" className={styles.formLabel}>Start Date:</label>
           <input
             type="date"
             id="date"
@@ -56,8 +58,8 @@ const CreateItem: React.FC = () => {
             required
           />
         </div>
-        <div>
-          <label htmlFor="date">End Date:</label>
+        <div className={styles.formGroup}>
+          <label htmlFor="date" className={styles.formLabel}>End Date:</label>
           <input
             type="date"
             id="date"
@@ -66,8 +68,10 @@ const CreateItem: React.FC = () => {
             required
           />
         </div>
+        <div className={styles.formGroup}>
         <ItemTypeDropdown value={itemType} onChange={setItemType} />
-        <button type="submit">Create Item</button>
+        </div>
+        <button type="submit" className={styles.formButton}>Create Item</button>
       </form>
     </div>
   );

@@ -31,7 +31,6 @@ const Calendar: React.FC = () => {
         <CalendarDays />
         <CalendarCells />
       </div>
-      <DataFetcher />
     </div>
   );
 };

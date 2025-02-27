@@ -5,6 +5,10 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --primary-color: #007bff;
+  --secondary-color: #6c757d;
+  --font-family-sans: 'Helvetica Neue', Arial, sans-serif;
+  --font-family-serif: 'Georgia', sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -17,15 +21,17 @@
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: var(--font-geist-sans);
+  font-family: var(--font-family-sans);
   min-height: 200vh;
 }
+
 html, body {
-  margin: 0;
-  padding: 0;
+  margin: 20px;
+  padding: 20;
   box-sizing: border-box;
   height: 100%;
 }
+
 .grid {
   display: grid;
 }
@@ -38,13 +44,66 @@ html, body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 .core-content {
   justify-content: center;
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
 }
+
 .main {
   justify-content: center;
   padding: 20px;
+}
+
+/* Global header styles */
+h1, h2, h3, h4, h5, h6 {
+  margin: 0 0 10px 0;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--foreground);
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-family: var(--font-family-serif);
+}
+
+h2 {
+  font-size: 2rem;
+  font-family: var(--font-family-serif);
+}
+
+h3 {
+  font-size: 1.75rem;
+  font-family: var(--font-family-serif);
+}
+
+h4 {
+  font-size: 1.5rem;
+  font-family: var(--font-family-sans);
+}
+
+h5 {
+  font-size: 1.25rem;
+  font-family: var(--font-family-sans);
+}
+
+h6 {
+  font-size: 1rem;
+  font-family: var(--font-family-sans);
+}
+Button {
+  display: inline-block;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 1px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+Button:hover {
+  background-color: #0056b3;
 }
