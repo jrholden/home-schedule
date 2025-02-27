@@ -37,6 +37,7 @@ const getItems = async (req, res) => {
   }
 };
 
+
 const saveItem = async (req, res) => {
   const { title, startDate, endDate, itemType } = req.body;
   console.log("Saving item: " + title);
@@ -50,7 +51,32 @@ const saveItem = async (req, res) => {
   }
 };
 
+const deleteItem = async(req, res) => {
+  const { _id } = req.body;
+  try{
+    console.log("deleting: " + _id);
+    const itemDeleteStatus = await Item.deleteOne({_id});
+    res.status(200).json(itemDeleteStatus);
+  }catch (error){
+    console.error(error);
+    res.status(400).json({error:error.message})
+  }
+}
+const patchItem = async(req, res) => {
+  const { _id, ...updateData} = req.body;
+  try{
+    console.log("patching: " + _id + " With:: ");
+    console.log(updateData);
+    const itemUpdateStatus = await Item.findByIdAndUpdate({_id}, {...updateData});
+    res.status(200).json(itemUpdateStatus);
+  }catch (error){
+    console.error(error);
+    res.status(400).json({error:error.message})
+  }
+}
 export { 
   getItems, 
-  saveItem 
+  saveItem,
+  deleteItem,
+  patchItem 
 };
