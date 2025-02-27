@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { format, startOfMonth, endOfMonth, startOfWeek, endOfWeek, addDays, isSameMonth, isSameDay } from 'date-fns';
 import styles from '@components/Calendar/Calendar.module.css';
 import useItemContext from '@/hooks/useItemContext';
 import useDateContext from '@/hooks/useDateContext';
 import { formatDateWithTimezone } from '@/utils/dateUtils';
+import BasicModal from '@components/BasicModal/BasicModal';
 
 interface CalendarCellsProps {
 
@@ -12,8 +13,15 @@ interface CalendarCellsProps {
 const CalendarCells: React.FC<CalendarCellsProps> = () => {
   const { currentMonth } = useDateContext();
   const { items, loading } = useItemContext();
+  
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalItems, setModalItems] = useState<any[]>([]);
   const onCellClick = (dateItems: any) => {
-    console.log(dateItems);
+    setModalItems(dateItems);
+    setModalOpen(true);
+  };
+  const handleClose = () => {
+    setModalOpen(false);
   };
   if (loading) {
     return <div>Loading...</div>;
@@ -53,7 +61,18 @@ const CalendarCells: React.FC<CalendarCellsProps> = () => {
   }
 
 
-  return <div className={styles.body}>{rows}</div>;
+  return (
+    <div className={styles.body}>
+      {rows}
+      <BasicModal open={modalOpen} handleClose={handleClose} title="Items">
+        <ul>
+          {modalItems.map((item, index) => (
+            <li key={index}>{item._id}</li>
+          ))}
+        </ul>
+      </BasicModal>
+    </div>
+  )
 };
 
 export default CalendarCells;
