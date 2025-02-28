@@ -33,6 +33,21 @@ services:
       - mongo_data:/data/db
     networks:
       - app_network
+  client:
+    build:
+      context: .
+      args:
+        CLIENT_PORT: ${REACT_PORT}        
+      dockerfile: ./client/Dockerfile
+    container_name: client
+    ports:
+      - "${REACT_CONTAINER_PORT}:${REACT_PORT}"
+    environment:
+      - CLIENT_PORT=${REACT_PORT}
+    networks:
+      - app_network
+    depends_on:
+      - node
 
 volumes:
   mongo_data:

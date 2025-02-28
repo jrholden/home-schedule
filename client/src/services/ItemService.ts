@@ -34,5 +34,13 @@ export const ItemService = {
     } catch (err: any) {
       throw new Error(err);
     }
+  },
+  getItemTitle: async (_id: string) => {
+    try {
+      const itemTitle = await Backend.post('/item/get/title', {_id: _id});
+      return itemTitle;
+    } catch (err: any) {
+      throw new Error(err);
+    }
   }
 };

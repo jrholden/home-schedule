@@ -14,7 +14,7 @@ router.all('/', (req, res) => {
   }
 });
 
-router.get('/get', getItem);
-router.get('/get/title', getItemTitle)
+router.post('/get', getItem);
+router.post('/get/title', getItemTitle)
 
 export default router; 

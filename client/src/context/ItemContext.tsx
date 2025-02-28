@@ -8,7 +8,7 @@ import useDateContext from "@hooks/useDateContext";
 const ItemContext = createContext({
   items: [],
   loading: true,
-  addItem: (newItem: any) => { }, // Placeholder function to avoid errors
+  addItem: (newItem: any) => { },// Placeholder function to avoid errors
 });
 
 export const ItemContextProvider = ({ children }: { children: React.ReactNode }) => {
@@ -51,7 +51,6 @@ export const ItemContextProvider = ({ children }: { children: React.ReactNode })
     } finally {
       setLoading(false);
     }
-
   };
 
   return (
