@@ -5,11 +5,17 @@ import { ItemType } from '@shared/enums';
 import { formatDateWithTimezone } from '@/utils/dateUtils';
 import styles from './CreateItem.module.css';
 
-const CreateItem: React.FC = () => {
+interface CreateItemProps {
+  closeSomething?: () => void;
+  initialStartDate?: string;
+  initialEndDate?: string;
+}
+
+const CreateItem: React.FC<CreateItemProps> = ({closeSomething, initialStartDate, initialEndDate}) => {
   const { addItem } = useItemContext();
   const [title, setTitle] = useState('');
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');  
+  const [startDate, setStartDate] = useState(initialStartDate);
+  const [endDate, setEndDate] = useState(initialEndDate);  
   const [itemType, setItemType] = useState<ItemType>(ItemType.TypeA);
 
   const handleStartDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -30,6 +36,9 @@ const CreateItem: React.FC = () => {
       setStartDate('');
       setEndDate('');
       setItemType(ItemType.TypeA);
+      if(closeSomething){
+        closeSomething();
+      }
     }
   };
 

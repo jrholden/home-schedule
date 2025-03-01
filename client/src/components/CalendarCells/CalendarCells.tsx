@@ -19,7 +19,9 @@ const CalendarCells: React.FC<CalendarCellsProps> = () => {
 
   const [modalOpen, setModalOpen] = useState(false);
   const [modalItems, setModalItems] = useState<any[]>([]);
-  const onCellClick = (dateItems: any) => {
+  const [currentDayCode, setCurrentDayCode] = useState<any>('');
+  const onCellClick = (dateItems: any, currentDay:any) => {
+    setCurrentDayCode(format(new Date(currentDay), 'yyyy-MM-dd'));
     setModalItems(dateItems);
     setModalOpen(true);
   };
@@ -32,7 +34,6 @@ const CalendarCells: React.FC<CalendarCellsProps> = () => {
 
   let rows: any[] = [];
   let cols: any[] = [];
-
   for (let i = 0; i < items.length; i++) {
     const week = items[i];
     let rowKey = "row-" + i;
@@ -49,7 +50,7 @@ const CalendarCells: React.FC<CalendarCellsProps> = () => {
         <div
           className={`col cell ${styles.col} ${styles.cell} ${!isSameMonth(currentDay, currentMonth) ? styles.disabled : isSameDay(currentDay, new Date()) ? styles.selected : ''}`}
           key={colKey}
-          onClick={() => onCellClick(items)}
+          onClick={() => onCellClick(items, currentDay)}
         >
           <span className={`number ${currentDayItemCount > 0 ? styles.bold : ''}`}>{formattedDate}</span>
         </div>
@@ -69,7 +70,7 @@ const CalendarCells: React.FC<CalendarCellsProps> = () => {
       {rows}
       <BasicModal open={modalOpen} handleClose={handleClose} title="Items">
         <DisplayItems items={modalItems} />
-        <CreateItem />
+        <CreateItem closeSomething={handleClose} initialStartDate={currentDayCode} initialEndDate={currentDayCode}/>
       </BasicModal>
     </div>
   )
