@@ -22,12 +22,11 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: var(--font-family-sans);
-  min-height: 200vh;
 }
 
 html, body {
   margin: 20px;
-  padding: 20;
+  padding: 20px;
   box-sizing: border-box;
   height: 100%;
 }

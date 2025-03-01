@@ -5,6 +5,7 @@ import useItemContext from '@/hooks/useItemContext';
 import useDateContext from '@/hooks/useDateContext';
 import { formatDateWithTimezone } from '@/utils/dateUtils';
 import BasicModal from '@components/BasicModal/BasicModal';
+import DisplayItems from '@components/DisplayItems/DisplayItems'
 
 import CreateItem from '../CreateItem/CreateItem';
 
@@ -67,15 +68,7 @@ const CalendarCells: React.FC<CalendarCellsProps> = () => {
     <div className={styles.body}>
       {rows}
       <BasicModal open={modalOpen} handleClose={handleClose} title="Items">
-        <ul>
-          {modalItems.map((item, index) => {
-            
-              return (
-                <li key={index}>{item._id}</li>
-              )
-            
-          })}
-        </ul>
+        <DisplayItems items={modalItems} />
         <CreateItem />
       </BasicModal>
     </div>
