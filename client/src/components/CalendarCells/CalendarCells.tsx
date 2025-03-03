@@ -6,8 +6,10 @@ import useDateContext from '@/hooks/useDateContext';
 import { formatDateWithTimezone } from '@/utils/dateUtils';
 import BasicModal from '@components/BasicModal/BasicModal';
 import DisplayItems from '@components/DisplayItems/DisplayItems'
+import CalendarCell from '@components/CalendarCell/CalendarCell';
 
-import CreateItem from '../CreateItem/CreateItem';
+import CreateItem from '@components/CreateItem/CreateItem';
+import ItemsModal from '@components/ItemsModal/ItemsModal';
 
 interface CalendarCellsProps {
 
@@ -39,21 +41,9 @@ const CalendarCells: React.FC<CalendarCellsProps> = () => {
     let rowKey = "row-" + i;
     for (const [date, items] of Object.entries(week)) {
       let currentDay = new Date(formatDateWithTimezone(date));
-      let currentDayItemCount = 0;
-      let formattedDate = format(currentDay, 'd');
-      if ((items as any[]).length > 0) {
-        currentDayItemCount = (items as any[]).length;
-      }
-      let colKey = currentDay.toString();
-
+      let cellKey = `cell-${i}-${date}`;
       cols.push(
-        <div
-          className={`col cell ${styles.col} ${styles.cell} ${!isSameMonth(currentDay, currentMonth) ? styles.disabled : isSameDay(currentDay, new Date()) ? styles.selected : ''}`}
-          key={colKey}
-          onClick={() => onCellClick(items, currentDay)}
-        >
-          <span className={`number ${currentDayItemCount > 0 ? styles.bold : ''}`}>{formattedDate}</span>
-        </div>
+        <CalendarCell key={cellKey} items={items as any[]} currentDay={currentDay} onCellClick={onCellClick} />
       );
     }
     rows.push(
@@ -68,10 +58,7 @@ const CalendarCells: React.FC<CalendarCellsProps> = () => {
   return (
     <div className={styles.body}>
       {rows}
-      <BasicModal open={modalOpen} handleClose={handleClose} title="Items">
-        <DisplayItems items={modalItems} />
-        <CreateItem closeSomething={handleClose} initialStartDate={currentDayCode} initialEndDate={currentDayCode}/>
-      </BasicModal>
+      <ItemsModal handleClose={handleClose} modalItems={modalItems} modalOpen={modalOpen} currentDayCode={currentDayCode}/>
     </div>
   )
 };
