@@ -9,18 +9,30 @@ const itemSchema = new Schema(
       type: String,
       required: true,
     },
-    startDate: {
-      type: Date,
-      required: true,
-    },
-    endDate: {
-      type: Date,
-      required: true,
-    },
     itemType: {
       type: String,
       required: true,
     },
+    dateInfo: {
+      startDate: {
+        type: Date,
+        required: true,
+      },
+      endDate: {
+        type: Date,
+        required: true,
+      }
+    },
+    itemInfo: {
+      owner: {
+        type: String,
+        required: false
+      },
+      groupId: {
+        type: String,
+        required: false
+      }
+    }
   },
   { timestamps: true }
 );

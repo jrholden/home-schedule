@@ -38,6 +38,18 @@ export const Backend = {
     });
     return response.json();
   },
+  patch: async (url: string, data: any, options = {}) => {
+    const response = await fetch(`${BASE_URL}${url}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify(data),
+      ...options,
+    });
+    return response.json();
+  },
 
   delete: async (url: string, options = {}) => {
     const response = await fetch(`${BASE_URL}${url}`, {

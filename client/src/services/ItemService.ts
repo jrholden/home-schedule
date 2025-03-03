@@ -6,9 +6,9 @@ export const ItemService = {
   getItems: async (currentMonth: Date, dateData: any[]) => {
     const formattedDate = encodeURIComponent(currentMonth.toISOString());
     try {
-      
+
       if (dateData?.length > 0) {
-        let mockDateData:any[] = dateData.map(obj => ({ ...obj }));;
+        let mockDateData: any[] = dateData.map(obj => ({ ...obj }));;
         //create copy so we don't mutate the original
         mockDateData = dateData.map(obj => ({ ...obj }));
         const result = await Backend.get(`/items/get?currentMonth=${formattedDate}`);
@@ -29,7 +29,7 @@ export const ItemService = {
   },
   saveItem: async (data: any) => {
     try {
-      const savedItemId = await Backend.post('/items/save', data);
+      const savedItemId = await Backend.post('/item/save', data);
       return savedItemId;
     } catch (err: any) {
       throw new Error(err);
@@ -37,8 +37,32 @@ export const ItemService = {
   },
   getItemTitle: async (_id: string) => {
     try {
-      const itemTitle = await Backend.post('/item/get/title', {_id: _id});
+      const itemTitle = await Backend.post('/item/get/title', { _id: _id });
       return itemTitle;
+    } catch (err: any) {
+      throw new Error(err);
+    }
+  },
+  getItemType: async (_id: string) => {
+    try {
+      const itemType = await Backend.post('/item/get/type', { _id: _id });
+      return itemType;
+    } catch (err: any) {
+      throw new Error(err);
+    }
+  },
+  patchItemTitle: async (_id: string, title: string) => {
+    try {
+      const status = await Backend.patch('/item/patch/title', { _id: _id, title: title });
+      return status;
+    } catch (err: any) {
+      throw new Error(err);
+    }
+  },
+  patchItemType: async (_id: string, itemType: string) => {
+    try {
+      const status = await Backend.patch('/item/patch/title', { _id: _id, itemType: itemType });
+      return status;
     } catch (err: any) {
       throw new Error(err);
     }

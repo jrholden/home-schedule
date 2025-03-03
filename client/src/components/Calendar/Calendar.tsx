@@ -10,7 +10,7 @@ import useDateContext from '@/hooks/useDateContext';
 import styles from './Calendar.module.css';
 
 const Calendar: React.FC = () => {
-  const {currentMonth, dateData, setMonthFocus} = useDateContext();
+  const { currentMonth, setMonthFocus } = useDateContext();
 
   const handlePrevMonth = () => {
     setMonthFocus(subMonths(currentMonth, 1));
