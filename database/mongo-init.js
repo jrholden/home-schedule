@@ -6,7 +6,31 @@ const db = db.getSiblingDB('home_schedule');
 // Create and populate the users collection
 db.createCollection('users');
 db.users.insertMany([
-  { username: 'jholden', password: 'Password1', role: 'superadmin' }
+  {
+    _id: ObjectId('67c758f50fbd8082ee161bce'),
+    email: 'jholden.hhnet@gmail.com',
+    password: '$argon2id$v=19$m=65536,t=3,p=4$muwDu7eKCGQmhBpaD8QBaQ$X8Bs9dmLtFteVHg+Lw9m9aCiEdrBW2h+5+BWFPQStIw',
+    authRole: 'superadmin',
+    userData: { firstName: 'unknown', lastName: 'unknown', address: 'unknown' },
+    userConfig: [
+      {
+        name: 'theme',
+        value: {
+          itemTypeColor: {
+            Financial: 'Blue',
+            Maintenance: 'Green',
+            'Security + Safety': 'Red',
+            Administrative: 'Orange',
+            'Home Improvement': 'Yellow'
+          }
+        },
+        _id: ObjectId('67c758f50fbd8082ee161bcf')
+      }
+    ],
+    createdAt: ISODate('2025-03-04T19:48:05.907Z'),
+    updatedAt: ISODate('2025-03-04T19:48:05.907Z'),
+    __v: 0
+  }
 ]);
 print('Inserted users into the users collection');
 

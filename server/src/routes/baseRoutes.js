@@ -1,7 +1,9 @@
 import express from 'express';
 //import routes
 import itemRoutes from './itemsRoutes.js';
-import singleItemRoutes from './singleItemRoutes.js'
+import singleItemRoutes from './singleItemRoutes.js';
+import userRoutes from './userRoutes.js';
+
 
 const router = express.Router();
 
@@ -19,5 +21,7 @@ router.all('/', (req, res) => {
 router.use('/item', singleItemRoutes);
 
 router.use('/items', itemRoutes);
+
+router.use('/user', userRoutes);
 
 export default router; 

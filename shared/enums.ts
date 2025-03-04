@@ -6,3 +6,15 @@ export enum ItemType {
   TypeE = "Home Improvement",
   TypeF = "Community Responsibilities",
 }
+
+export enum UserRole {
+  USER = "user",
+  ADMIN = "admin",
+  SUPERADMIN = "superadmin"
+
+}
+export enum GroupRole {
+  PEON = "peon",
+  WORKER = "worker",
+  ADMIN = "admin"
+}

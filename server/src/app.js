@@ -6,6 +6,7 @@ import mongoose from 'mongoose';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import connectDB from './config/database.js';
+import corsOptions from './config/corsOptions.js';
 //import routes
 import baseRoutes from './routes/baseRoutes.js';
 
@@ -17,18 +18,12 @@ const PORT = process.env.PORT || 9595;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const corsOptions = {
-    origin: process.env.CORS_ORIGIN || 'http://localhost:3000',
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    credentials: true,
-};
-
 connectDB();
 
-console.log(process.env.NODE_ENV)
-
-
+//custom middleware
 app.use(cors(corsOptions));
+
+//standard middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -60,7 +55,10 @@ app.all('*', (req, res) => {
 })
 
 mongoose.connection.once('open', () => {
-    app.listen(PORT, () => console.log(`Server runing on port ${PORT}`));
+    app.listen(PORT, () => {
+        console.log("env: " + process.env.NODE_ENV)
+        console.log(`Server runing on port ${PORT}`);
+    });
 })
 
 mongoose.connection.on('error', (err) => {
