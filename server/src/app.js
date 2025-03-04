@@ -23,7 +23,7 @@ const corsOptions = {
     credentials: true,
 };
 
-connectDB()
+connectDB();
 
 console.log(process.env.NODE_ENV)
 
@@ -39,31 +39,30 @@ app.use((req, res, next) => {
     console.log(req.body);
     next();
 });
-app.use('/', express.static(path.join(__dirname, 'public')))
+app.use('/', express.static(path.join(__dirname, 'public')));
 
 
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'index.html'))
+    res.sendFile(path.join(__dirname, 'views', 'index.html'));
 });
 app.use('/api', baseRoutes);
 
 app.all('*', (req, res) => {
     res.status(404)
     if (req.accepts('html')) {
-        res.sendFile(path.join(__dirname, 'views', '404.html'))
+        res.sendFile(path.join(__dirname, 'views', '404.html'));
     } else if (req.accepts('json')) {
-        res.json({ message: '404 not Found', status: 404 })
+        res.json({ message: '404 not Found', status: 404 });
     } else {
-        res.type('txt').send('404 Not Found')
+        res.type('txt').send('404 Not Found');
     }
 })
 
 mongoose.connection.once('open', () => {
-    console.log('Connected to MongoDB')
-    app.listen(PORT, () => console.log(`Server runing on port ${PORT}`))
+    app.listen(PORT, () => console.log(`Server runing on port ${PORT}`));
 })
 
 mongoose.connection.on('error', (err) => {
-    console.log(err)
+    console.error("MONGO HAD A BAD TIME:: ", err);
 })
