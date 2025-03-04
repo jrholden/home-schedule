@@ -18,9 +18,9 @@ const getItem = async (req, res) => {
 const getItemTitle = async (req, res) => {
   const { _id } = req.body;
   try {
-    const item = await Item.findById(_id);
-    console.log("Sending " + item.title);
-    res.status(200).json({ title: item.title });
+    const {title} = await Item.findById(_id);
+    console.log("Sending " + title);
+    res.status(200).json({ title: title });
   } catch (error) {
     console.error(error);
     res.status(400).json({ error: error });
@@ -31,7 +31,7 @@ const getItemType = async (req, res) => {
   try {
     const { itemType } = await Item.findById(_id);
     console.log("Sending " + itemType);
-    res.status(200).json(itemType);
+    res.status(200).json({itemType: itemType});
   } catch (error) {
     console.error(error);
     res.status(400).json({ error: error });

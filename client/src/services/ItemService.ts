@@ -1,6 +1,7 @@
 import { Backend } from './Backend';
 import { format, startOfMonth, endOfMonth, startOfWeek, endOfWeek, addDays, isSameMonth, isSameDay } from 'date-fns';
 import { getWeekOfMonth } from '@utils/dateUtils';
+import { promiseHooks } from 'v8';
 export const ItemService = {
   // Service logic here
   getItems: async (currentMonth: Date, dateData: any[]) => {
@@ -66,5 +67,15 @@ export const ItemService = {
     } catch (err: any) {
       throw new Error(err);
     }
+  },
+  getItemData: async (_id: string) => {
+    let promises: Promise<any>[] = [];
+    promises.push(ItemService.getItemTitle(_id));
+    promises.push(ItemService.getItemType(_id));
+
+    let result = await Promise.all(promises);
+    return result.reduce((acc, obj) => {
+      return { ...acc, ...obj };
+    }, {});
   }
 };

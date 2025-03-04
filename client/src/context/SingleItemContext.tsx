@@ -4,17 +4,18 @@ import { createContext, useState, useEffect } from "react";
 import { ItemService } from '@services/ItemService';
 
 export interface ItemDataI {
-  title: string
+  title: string,
+  itemType: string
 }
 
 const SingleItemContext = createContext({
-  item:{title:''},
+  item:{title:'',itemType:''},
   loading: true,
   getItem: (_id:string) => {}
 })
 
 export const SingleItemContextProvider = ({ children }: { children: React.ReactNode }) => {
-  const [item, setItem] = useState<ItemDataI>({title:''});
+  const [item, setItem] = useState<ItemDataI>({title:'',itemType:''});
   const [itemId, setItemId] = useState<string>('');
   const [loading, setLoading] = useState(true);
 
@@ -22,7 +23,8 @@ export const SingleItemContextProvider = ({ children }: { children: React.ReactN
     const fetchItemData = async () => {
       setLoading(true);
       try{
-        ItemService.getItemTitle(itemId).then((data) => {
+        ItemService.getItemData(itemId).then((data) => {
+          console.log(data);
           setItem(data);
           setLoading(false);
         });

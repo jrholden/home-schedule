@@ -20,9 +20,10 @@ const DisplayItem: React.FC<DisplayItemProps> = ({ itemId }) => {
     );
   } else {
     return (
-      <div>
-        {item.title}
-      </div>
+      <ul>
+        <li>{item.title}</li>
+        <li>{item.itemType}</li>
+      </ul>
     );
   }
 };

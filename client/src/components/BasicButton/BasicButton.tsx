@@ -1,11 +1,16 @@
 import React from 'react';
 
-const BasicButton: React.FC = () => {
+interface ButtonProps {
+  label: string;
+  onClick: () => void;
+}
+
+const Button: React.FC<ButtonProps> = ({ label, onClick }) => {
   return (
-    <div>
-      <h1>BasicButton Component</h1>
-    </div>
+    <button onClick={onClick}>
+      {label}
+    </button>
   );
 };
 
-export default BasicButton;
+export default Button;
